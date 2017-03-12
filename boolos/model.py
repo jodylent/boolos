@@ -87,6 +87,13 @@ class Pantheon(object):
         self._t_god = T_God()
         self._f_god = F_God()
         self._r_god = R_God()
+        # Randomize words
+        if random.randint(0, 1):
+            self.yes = "ja"
+            self.no = "da"
+        else:
+            self.yes = "da"
+            self.no = "ja"
         # Randomize assignment to A, B, C
         g_list = [self._t_god, self._f_god, self._r_god]
         random.shuffle(g_list)
@@ -106,7 +113,8 @@ class Pantheon(object):
         }
 
     def __str__(self):
-        return "<{0}: A={1}; B={2}; C={3}>".format(self.__class__.__name__,
-                                                   self.a.name.title(),
-                                                   self.b.name.title(),
-                                                   self.c.name.title())
+        return "<{0}: A={1}; B={2}; C={3}; Y='{4}'>".format(self.__class__.__name__,
+                                                            self.a.name.title(),
+                                                            self.b.name.title(),
+                                                            self.c.name.title(),
+                                                            self.yes)
