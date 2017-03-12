@@ -72,21 +72,22 @@ class R_God(Role):
 
     def answer(self, query, pantheon):
         if random.randint(0, 1):
-            return self.evaluate(query, pantheon)
+            return pantheon._t_god.evaluate(query, pantheon)
         else:
-            return to_lie(self.evaluate(query, pantheon))
+            return pantheon._f_god.evaluate(query, pantheon)
 
 
 class Pantheon(object):
     """
     """
 
-    def __init__(self):
+    def __init__(self, force_order=False):
         """
         """
         self._t_god = T_God()
         self._f_god = F_God()
         self._r_god = R_God()
+        self.force_order = force_order
         # Randomize words
         if random.randint(0, 1):
             self.yes = "ja"
@@ -94,9 +95,10 @@ class Pantheon(object):
         else:
             self.yes = "da"
             self.no = "ja"
-        # Randomize assignment to A, B, C
         g_list = [self._t_god, self._f_god, self._r_god]
-        random.shuffle(g_list)
+        # Randomize assignment to A, B, C
+        if not self.force_order:
+            random.shuffle(g_list)
         # Assign exposed roles
         self.a = g_list[0]
         self.b = g_list[1]
