@@ -23,23 +23,28 @@ def to_god_lang(val, pantheon):
         return pantheon.no
 
 
-def test_query(p, q):
+def test_query(g, p, q):
     """
     Tests a query and prints out full run details
 
+    :param g: God to query [ A | B | C ]
+    :type g: str
     :param p: Pantheon to test
     :type p: boolos.model.Pantheon
     :param q: Query string to be processed by boolos.model.Role.evaluate()
     :type q: str
     """
-    eng_val = p.a.answer(q, p)
-    god_val = ask(p.a, q, p)
+    god = getattr(p, g)
+    evl_val = god.evaluate(q, p)
+    eng_val = god.answer(q, p)
+    god_val = ask(god, q, p)
 
     test_string = """
-    QUERY A: {0}
-    ENGLISH: {1}
-    GOD-ESE: {2}
-    GODS:    {3}
+    QUERY {0}: {1}
+    EVAL TO: {2}
+    ENGLISH: {3}
+    GOD-ESE: {4}
+    GODS:    {5}
     """
 
-    print(test_string.format(q, eng_val, god_val, p))
+    print(test_string.format(g, q, evl_val, eng_val, god_val, p))
