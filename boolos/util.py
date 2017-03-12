@@ -1,8 +1,10 @@
+import random
+
 FALSY_LIST = ["false", "no", "0", "none"]
 
 
 def ask(god, query, pantheon={}):
-    return to_god_lang(god.answer(query, pantheon))
+    return to_god_lang(god.answer(query, pantheon), True)
 
 
 def to_lie(val):
@@ -16,7 +18,14 @@ def to_lie(val):
         return False
 
 
-def to_god_lang(val, yes_word="ja", no_word="da"):
+def to_god_lang(val, rand_words=False, yes_word="ja", no_word="da"):
+    if rand_words:
+        if random.randint(0, 1):
+            yes_word = "ja"
+            no_word = "da"
+        else:
+            yes_word = "da"
+            no_word = "ja"
     if val:
         return yes_word
     else:
@@ -36,7 +45,7 @@ def test_query(p, q):
     god_val = ask(p.a, q, p)
 
     test_string = """
-    QUERY:   {0}
+    QUERY A: {0}
     ENGLISH: {1}
     GOD-ESE: {2}
     GODS:    {3}
