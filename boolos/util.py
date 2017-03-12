@@ -35,7 +35,7 @@ def test_query(p, q):
     eng_val = p.a.answer(q, p)
     god_val = ask(p.a, q, p)
 
-    test_string = """\n
+    test_string = """
     QUERY:   {0}
     ENGLISH: {1}
     GOD-ESE: {2}
