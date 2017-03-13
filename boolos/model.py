@@ -109,9 +109,9 @@ class Pantheon(object):
             "t": self._t_god,
             "f": self._f_god,
             "r": self._r_god,
-            "a": self.a.name,
-            "b": self.b.name,
-            "c": self.c.name
+            "a": self.a,
+            "b": self.b,
+            "c": self.c
         }
 
     def __str__(self):
